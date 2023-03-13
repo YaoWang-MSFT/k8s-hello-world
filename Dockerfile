@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:18
 ENV PORT 80
 EXPOSE 80
 
