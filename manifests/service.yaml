@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: test003
-  namespace: namespace-workflow-1678727974140
+  name: testwf1
+  namespace: namespace-workflow-1727802436322
+  labels:
+    kubernetes.azure.com/generator: devhub
 spec:
   type: LoadBalancer
   selector:
-    app: test003
+    app: testwf1
   ports:
     - protocol: TCP
       port: 80
