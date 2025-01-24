@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: test0313-001
-  namespace: namespace-workflow-1678728230943
+  name: wy-test-workflow-1
+  namespace: namespace-workflow-1737750858586
+  labels:
+    app.kubernetes.io/name: wy-test-workflow-1
+    kubernetes.azure.com/generator: devhub
 spec:
   type: LoadBalancer
   selector:
-    app: test0313-001
+    app.kubernetes.io/name: wy-test-workflow-1
   ports:
     - protocol: TCP
       port: 80
