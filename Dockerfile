@@ -1,11 +1,16 @@
-FROM node:19
-ENV PORT 80
+FROM golang:1.15 AS builder
+
+WORKDIR /build
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o app-binary
+
+FROM gcr.io/distroless/static-debian12
+
+ENV PORT=80
 EXPOSE 80
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json .
-RUN npm install
-COPY . .
-
-CMD ["npm", "start"]
+WORKDIR /app
+COPY --from=builder /build/app-binary . 
+CMD ["/app/app-binary"]
